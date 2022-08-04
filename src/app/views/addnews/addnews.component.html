@@ -1,0 +1,25 @@
+<form [formGroup]="newsForm" (ngSubmit)="addnews(newsForm.value)" class="form-group">
+    <div class="mb-3">
+        <label for="title" class="form-label">Title</label>
+        <input type="text" class="form-control" id="title" formControlName="title" >
+    </div>
+    <div class="errors d-felx" *ngIf="myValues['title'].touched && myValues['title'].invalid">
+        <div *ngIf="myValues['title'].errors?.['required']">
+            this field is required
+        </div>
+    </div>
+
+    <br><br>
+    <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+        <input type="text" class="form-control" id="description" formControlName="description" >
+    </div>
+    <div class="errors d-felx" *ngIf="myValues['description'].touched && myValues['description'].invalid">
+        <div *ngIf="myValues['description'].errors?.['required']">
+            this field is required
+        </div>
+    </div>
+   
+   
+    <button type="submit" class="btn btn-primary">Add</button>
+</form>

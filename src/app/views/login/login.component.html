@@ -1,0 +1,61 @@
+
+<form class="container col-5 mt-5" style="height: 39em;" #contactForm="ngForm" (ngSubmit)="login(contactForm.value)">
+
+
+    <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input 
+        type="email" 
+        class="form-control" 
+        id="email"
+        ngModel
+        #email="ngModel"
+        name="email"
+        email
+        required
+        (focus)="changeLogin()"
+        >
+        <div class="error d-felx text-danger " *ngIf="email.invalid && email.touched">
+            <div *ngIf="email.errors?.['required']">
+                This fuild is required
+            </div>
+            <div *ngIf="email.errors?.['email']">
+                Enter valid email 
+            </div>
+        </div>
+    </div>
+    <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input 
+        type="password" 
+        class="form-control" 
+        id="password"
+        ngModel
+        #password="ngModel"
+        name="password"
+        required
+        minlength="6"
+        (focus)="changeLogin()"
+        >
+        <div class="error d-felx text-danger " *ngIf="password.invalid && password.touched">
+            <div *ngIf="password.errors?.['required']">
+                This fuild is required
+            </div>
+            <div *ngIf="password.errors?.['minlength']">
+                you must enter {{password.errors?.['minlength'].requiredLength}}  character
+            </div>
+        </div>
+    </div>
+
+    <div class="error d-felx text-danger " *ngIf="invalidLogin">
+         Your email or password is wrong
+    </div>
+
+
+    <button type="submit"
+     class="btn btn-primary my-2"
+      [disabled]="contactForm.invalid">Login</button>
+
+    <button type="submit"
+     class="btn btn-primary mx-5 my-2" routerLink="/signup">Signup</button>
+</form>

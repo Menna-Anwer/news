@@ -1,0 +1,130 @@
+<form class="container col-5 mt-5 "
+  #contactForm="ngForm" 
+  (ngSubmit)="signUp(contactForm.value)">
+    
+      
+    <br><br>
+
+
+    <div class="mb-3">
+        <label for="firstname" class="form-label">Name</label>
+        <input 
+        type="text" 
+        class="form-control" 
+        id="firstname"
+        ngModel
+        #name="ngModel"
+        name="name"
+        required
+        >
+        <div class="error d-felx text-danger " *ngIf="name.invalid && name.touched">
+        <div *ngIf="name.errors?.['required']">
+            This fuild is required
+        </div>
+    </div>
+    </div>
+   
+    <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input 
+        type="email" 
+        class="form-control" 
+        id="email"
+        ngModel
+        #email="ngModel"
+        name="email"
+        email
+        required
+        (focus)="changeEmail()"
+        >
+        <div class="error d-felx text-danger " *ngIf="email.invalid && email.touched">
+            <div *ngIf="email.errors?.['required']">
+                This fuild is required
+            </div>
+            <div *ngIf="email.errors?.['email']">
+                Enter valid email 
+            </div>
+            <div class="errors d-flex justify-content-center" *ngIf="invalidEmail">
+                *Sorry email already in use.. try another one*
+              </div>
+        </div>
+    </div>
+    <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input 
+        type="password" 
+        class="form-control" 
+        id="password"
+        ngModel
+        #password="ngModel"
+        name="password"
+        required
+        minlength="6"
+        (focus)="changePassword()"
+        >
+        <div class="error d-felx text-danger " *ngIf="password.invalid && password.touched">
+            <div *ngIf="password.errors?.['required']">
+                This fuild is required
+            </div>
+            <div *ngIf="password.errors?.['minlength']">
+                you must enter {{password.errors?.['minlength'].requiredLength}}  character
+            </div>
+            <div class="errors d-flex justify-content-center" *ngIf="invalidPassword">
+                {{msgPassword}}
+              </div>
+        </div>
+    </div>
+    <div class="mb-3">
+        <label for="age" class="form-label">Age</label>
+        <input 
+        type="number" 
+        class="form-control" 
+        id="age"
+        ngModel
+        #age="ngModel"
+        name="age"
+        required
+        (focus)="changeAge()"
+        >
+        <div class="error d-felx text-danger " *ngIf="age.invalid && age.touched">
+            <div *ngIf="age.errors?.['required']">
+                This fuild is required
+            </div>
+            <div class="errors d-flex justify-content-center" *ngIf="invalidAge">
+                {{msgAge}}
+              </div>
+        </div>
+     
+    </div>
+    <div class="mb-3">
+        <label for="phonenumber" class="form-label">Phone Number</label>
+        <input 
+        type="phonenumber" 
+        class="form-control" 
+        id="phonenumber"
+        ngModel
+        #phonenumber="ngModel"
+        name="phonenumber"
+        required
+        minlength="11"
+        maxlength="11"
+        (focus)='changePhonenumber()'
+        >
+        <div class="error d-felx text-danger " *ngIf="phonenumber.invalid && phonenumber.touched">
+            <div *ngIf="phonenumber.errors?.['required']">
+                This fuild is required
+            </div>
+            <div *ngIf="phonenumber.errors?.['minlength']">
+                you must enter {{phonenumber.errors?.['minlength'].requiredLength}}
+            </div>
+            <div class="errors d-flex justify-content-center" *ngIf="invalidPhonenumber">
+                {{msgPhonenumber}}
+              </div>
+        </div>
+
+    </div>
+
+    <button type="submit"
+     class="btn btn-primary"
+      [disabled]="contactForm.invalid">Sign up</button>
+</form>
